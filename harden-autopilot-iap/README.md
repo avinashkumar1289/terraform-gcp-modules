@@ -6,7 +6,7 @@ GKE Autopilot clusters are deployed with Application-layer Secrets Encryption th
 
 Additionally we deploy a [tinyproxy](https://tinyproxy.github.io/) daemon which allows `kubectl` commands to be piped through the bastion host allowing ease of development from a local machine with the security of GKE Private Clusters.
 
-To provide outbound internet access for your private nodes, such as to pull images from an external registry, use [Cloud NAT](https://github.com/terraform-google-modules/terraform-google-cloud-nat/blob/master/README.md)
+To provide outbound internet access for your private nodes, such as to pull images from an external registry, deployed [Cloud NAT](https://github.com/terraform-google-modules/terraform-google-cloud-nat/blob/master/README.md)
 
 
 ## Setup
