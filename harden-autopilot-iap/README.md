@@ -114,6 +114,8 @@ keyring         = "gke-etcd01-ring"
 | svc_range_name | The name of the secondary subnet range to use for services | `string` | `"ip-range-svc"` | no |
 | master_authorized_networks | List of master authorized networks. If none are provided, disallow external access (except the cluster node IPs, which GKE automatically whitelists). | `list(object({ cidr_block = string, display_name = string }))` | `[]` | no |
 | service_account_roles | List of IAM roles to assign to the service account. | `list(string)` | `[]` | no |
+| keyring | Keyring name. | `string` | `"my-keyring"` | no |
+| keys | Key names. | `list(string)` | `[]` | no |
 
 ## Outputs
 
