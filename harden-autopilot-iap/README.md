@@ -36,6 +36,25 @@ To deploy this example:
    ```sh
    HTTPS_PROXY=localhost:8888 kubectl get pods --all-namespaces
    ```
+   
+ ### Configure a Service Account
+In order to execute this module you must have a Service Account with the
+following project roles:
+- roles/compute.instanceAdmin
+- roles/compute.securityAdmin
+- roles/container.clusterAdmin
+- roles/iam.serviceAccountAdmin
+- roles/iap.admin
+- roles/iam.serviceAccountUser
+- roles/resourcemanager.projectIamAdmin
+- roles/compute.networkAdmin
+- roles/cloudkms.admin
+- roles/serviceusage.serviceUsageAdmin
+- roles/storage.admin (GCS is used as a backend)
+- roles/compute.instanceAdmin.v1 (on the host project)
+- roles/compute.networkAdmin (on the host project)
+- roles/compute.securityAdmin (on the host project)
+- roles/resourcemanager.projectIamAdmin (on the host project) 
 
 ## Usage 
 
