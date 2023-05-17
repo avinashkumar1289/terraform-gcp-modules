@@ -59,11 +59,11 @@ variable "svc_range_name" {
   type        = string
 
 }
-variable "master_authorized_networks" {
-   description =  "List of master authorized networks. If none are provided, disallow external access (except the cluster node IPs, which GKE automatically whitelists)."
-   type = list(object({ cidr_block = string, display_name = string }))
-   default = []
-} 
+# variable "master_authorized_networks" {
+#    description =  "List of master authorized networks. If none are provided, disallow external access (except the cluster node IPs, which GKE automatically whitelists)."
+#    type = list(object({ cidr_block = string, display_name = string }))
+#    default = []
+# } 
 
 variable "maintenance_start_time" {
     description = "Time window specified for daily or recurring maintenance operations in RFC3339 format"

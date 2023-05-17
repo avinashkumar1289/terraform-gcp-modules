@@ -48,14 +48,17 @@ module "gke" {
   enable_private_nodes            = true
   grant_registry_access           = true
   master_ipv4_cidr_block          = "172.10.0.0/28"
-  master_authorized_networks      = var.master_authorized_networks
+  master_authorized_networks      = [{
+    cidr_block   = "${module.bastion.ip_address}/32"
+    display_name = "Bastion Host"
+  }]
   database_encryption             = [
   {
     "key_name": module.kms.keys[var.keys[0]],
     "state": "ENCRYPTED"
   }
 ] 
-  depends_on                      = [google_project_service.all]
+  depends_on                      = [module.enabled_google_apis]
 }
 
 

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-data "google_project" "project" {}
+# data "google_project" "project" {}
 
-locals {
-gke_sa = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
-}
+# locals {
+# gke_sa = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
+# }
 
 module "kms" {
   source  = "terraform-google-modules/kms/google"
@@ -31,10 +31,9 @@ module "kms" {
   set_decrypters_for      = var.keys
   set_encrypters_for      = var.keys
   encrypters = [
-   local.gke_sa,
+   "serviceAccount:${module.enabled_google_apis.enabled_api_identities["container.googleapis.com"]}",
   ]
   decrypters = [
-    local.gke_sa,
+  "serviceAccount:${module.enabled_google_apis.enabled_api_identities["container.googleapis.com"]}",
   ]
-  depends_on              = [google_project_service.all]
 }

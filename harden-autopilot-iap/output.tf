@@ -26,6 +26,7 @@ output "kubernetes_endpoint" {
 
 output "ca_certificate" {
   value = module.gke.ca_certificate
+  sensitive = true
 }
 
 output "service_account" {

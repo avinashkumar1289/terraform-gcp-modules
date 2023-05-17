@@ -50,6 +50,6 @@ module "bastion" {
   machine_type             = "g1-small"
   shielded_vm              = "false"
   service_account_roles    = var.service_account_roles
-  members                  = var.members 
-  depends_on               = [google_project_service.all]
+  members                  = var.bastion_members 
+  depends_on               = [module.enabled_google_apis]
 }
