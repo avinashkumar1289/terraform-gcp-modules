@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
- // Cloud Router for NAT GKE
+// Cloud Router for NAT GKE
 resource "google_compute_router" "router" {
   project = var.network_project_id
   name    = "nat-router"

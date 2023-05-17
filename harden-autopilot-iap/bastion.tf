@@ -29,27 +29,27 @@ locals {
 }
 
 data "google_compute_subnetwork" "my-subnetwork" {
-  name   = var.subnet_name
+  name    = var.subnet_name
   project = var.network_project_id
-  region = var.region
+  region  = var.region
 }
 
- // Module for Bastion-host to access Control plane 
+// Module for Bastion-host to access Control plane 
 
 module "bastion" {
-  source  = "terraform-google-modules/bastion-host/google"
-  version = "~> 5.0"
-  network                  = var.network_name
-  subnet                   = data.google_compute_subnetwork.my-subnetwork.self_link
-  project                  = var.project_id
-  host_project             = var.network_project_id
-  name                     = local.bastion_name
-  zone                     = local.bastion_zone
-  startup_script           = data.template_file.startup_script.rendered
-  image_project            = "debian-cloud"
-  machine_type             = "g1-small"
-  shielded_vm              = "false"
-  service_account_roles    = var.service_account_roles
-  members                  = var.bastion_members 
-  depends_on               = [module.enabled_google_apis]
+  source                = "terraform-google-modules/bastion-host/google"
+  version               = "~> 5.0"
+  network               = var.network_name
+  subnet                = data.google_compute_subnetwork.my-subnetwork.self_link
+  project               = var.project_id
+  host_project          = var.network_project_id
+  name                  = local.bastion_name
+  zone                  = local.bastion_zone
+  startup_script        = data.template_file.startup_script.rendered
+  image_project         = "debian-cloud"
+  machine_type          = "g1-small"
+  shielded_vm           = "false"
+  service_account_roles = var.service_account_roles
+  members               = var.bastion_members
+  depends_on            = [module.enabled_google_apis]
 }

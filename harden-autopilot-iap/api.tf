@@ -21,14 +21,14 @@ module "enabled_google_apis" {
 
   project_id                  = var.project_id
   disable_services_on_destroy = false
-  activate_api_identities     = [{
+  activate_api_identities = [{
     api = "container.googleapis.com",
     roles = ["roles/cloudkms.cryptoKeyDecrypter",
     "roles/cloudkms.cryptoKeyEncrypter"],
   }]
 
   activate_apis = [
-   "compute.googleapis.com",
+    "compute.googleapis.com",
     "cloudapis.googleapis.com",
     "vpcaccess.googleapis.com",
     "servicenetworking.googleapis.com",

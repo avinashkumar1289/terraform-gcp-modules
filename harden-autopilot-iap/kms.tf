@@ -21,19 +21,19 @@
 # }
 
 module "kms" {
-  source  = "terraform-google-modules/kms/google"
-  version = "~> 2.2.1"
-  project_id              = var.project_id
-  location                = var.region
-  keyring                 = var.keyring
-  keys                    = var.keys
-  prevent_destroy         = false
-  set_decrypters_for      = var.keys
-  set_encrypters_for      = var.keys
+  source             = "terraform-google-modules/kms/google"
+  version            = "~> 2.2.1"
+  project_id         = var.project_id
+  location           = var.region
+  keyring            = var.keyring
+  keys               = var.keys
+  prevent_destroy    = false
+  set_decrypters_for = var.keys
+  set_encrypters_for = var.keys
   encrypters = [
-   "serviceAccount:${module.enabled_google_apis.enabled_api_identities["container.googleapis.com"]}",
+    "serviceAccount:${module.enabled_google_apis.enabled_api_identities["container.googleapis.com"]}",
   ]
   decrypters = [
-  "serviceAccount:${module.enabled_google_apis.enabled_api_identities["container.googleapis.com"]}",
+    "serviceAccount:${module.enabled_google_apis.enabled_api_identities["container.googleapis.com"]}",
   ]
 }

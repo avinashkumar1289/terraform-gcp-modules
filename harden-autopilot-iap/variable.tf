@@ -16,7 +16,7 @@
 
 variable "project_id" {
   description = "The project ID to host the cluster in"
-   type        = string
+  type        = string
 }
 
 variable "region" {
@@ -27,7 +27,7 @@ variable "region" {
 
 variable "cluster_name" {
   description = "The name of the cluster (required)"
-   type        = string
+  type        = string
   default     = "gke-autopilot-private-1"
 
 }
@@ -66,21 +66,21 @@ variable "svc_range_name" {
 # } 
 
 variable "maintenance_start_time" {
-    description = "Time window specified for daily or recurring maintenance operations in RFC3339 format"
-    type =string
-    default = "2023-02-08T00:00:00Z"
+  description = "Time window specified for daily or recurring maintenance operations in RFC3339 format"
+  type        = string
+  default     = "2023-02-08T00:00:00Z"
 }
 
 variable "maintenance_end_time" {
-    description = "Time window specified for recurring maintenance operations in RFC3339 format"
-    type = string
-    default = "2023-02-08T05:00:00Z"
+  description = "Time window specified for recurring maintenance operations in RFC3339 format"
+  type        = string
+  default     = "2023-02-08T05:00:00Z"
 }
 
 variable "maintenance_recurrence" {
-    description = "Frequency of the recurring maintenance window in RFC5545 format"
-    type =string
-    default = "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH"
+  description = "Frequency of the recurring maintenance window in RFC5545 format"
+  type        = string
+  default     = "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH"
 }
 
 // Variables for Bastion

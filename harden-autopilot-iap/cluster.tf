@@ -42,23 +42,23 @@ module "gke" {
   release_channel                 = "RAPID"
   maintenance_start_time          = var.maintenance_start_time
   maintenance_end_time            = var.maintenance_end_time
-  maintenance_recurrence	        = var.maintenance_recurrence
+  maintenance_recurrence          = var.maintenance_recurrence
   enable_vertical_pod_autoscaling = true
   enable_private_endpoint         = true
   enable_private_nodes            = true
   grant_registry_access           = true
   master_ipv4_cidr_block          = "172.10.0.0/28"
-  master_authorized_networks      = [{
+  master_authorized_networks = [{
     cidr_block   = "${module.bastion.ip_address}/32"
     display_name = "Bastion Host"
   }]
-  database_encryption             = [
-  {
-    "key_name": module.kms.keys[var.keys[0]],
-    "state": "ENCRYPTED"
-  }
-] 
-  depends_on                      = [module.enabled_google_apis]
+  database_encryption = [
+    {
+      "key_name" : module.kms.keys[var.keys[0]],
+      "state" : "ENCRYPTED"
+    }
+  ]
+  depends_on = [module.enabled_google_apis]
 }
 
 
