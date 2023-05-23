@@ -14,39 +14,6 @@
  * limitations under the License.
  */
 
-resource "kubernetes_cluster_role" "gateway-impersonate" {
-  metadata {
-    name = "gateway-impersonate-role"
-  }
-  rule {
-    api_groups = [""]
-    resource_names = [
-      for user in var.users :
-      "${element(split(":", user), 1)}"
-    ]
-    resources = ["users"]
-    verbs     = ["impersonate"]
-  }
-  depends_on = [module.hub]
-}
-
-resource "kubernetes_cluster_role_binding" "gateway-impersonate" {
-  metadata {
-    name = "gateway-impersonate-binding"
-  }
-  role_ref {
-    kind      = "ClusterRole"
-    name      = "gateway-impersonate"
-    api_group = "rbac.authorization.k8s.io"
-  }
-  subject {
-    kind      = "ServiceAccount"
-    name      = "connect-agent-sa"
-    namespace = "gke-connect"
-  }
-  depends_on = [module.hub]
-}
-
 resource "kubernetes_cluster_role_binding" "gateway_cluster_admin" {
   metadata {
     name = "gateway-cluster-admin"
