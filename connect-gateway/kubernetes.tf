@@ -14,20 +14,43 @@
  * limitations under the License.
  */
 
+# resource "kubernetes_cluster_role_binding" "gateway_cluster_admin" {
+#   metadata {
+#     name = "gateway-cluster-admin"
+#   }
+#   dynamic "subject" {
+#     for_each = var.users
+#     content {
+#       kind = "User"
+#       name = element(split(":", subject.value), 1)
+#     }
+#   }
+#   role_ref {
+#     kind      = "ClusterRole"
+#     name      = "cluster-admin"
+#     api_group = "rbac.authorization.k8s.io"
+#   }
+#   depends_on = [module.hub]
+# }
+
+resource "random_string" "random_suffix" {
+  length  = 6
+  special = false
+}
+
 resource "kubernetes_cluster_role_binding" "gateway_cluster_admin" {
+  for_each = { for perm in var.user_permissions : "${element(split(":", perm.user), 1)}-${perm.rbac_role}" => perm }
   metadata {
-    name = "gateway-cluster-admin"
+    name = "gateway-cluster-admin-${random_string.random_suffix.result}"
   }
-  dynamic "subject" {
-    for_each = var.users
-    content {
-      kind = "User"
-      name = element(split(":", subject.value), 1)
-    }
+  subject {
+    kind      = "User"
+    name      = element(split(":", each.value.user), 1)
+    api_group = "rbac.authorization.k8s.io"
   }
   role_ref {
     kind      = "ClusterRole"
-    name      = "cluster-admin"
+    name      = each.value.rbac_role
     api_group = "rbac.authorization.k8s.io"
   }
   depends_on = [module.hub]

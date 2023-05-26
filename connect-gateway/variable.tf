@@ -60,11 +60,11 @@ variable "svc_range_name" {
 
 }
 
-variable "users" {
-  type        = list(string)
-  description = "List of users, groups, SAs who need access to the kubernetes cluster via connect Gateway"
-  default     = ["user:avinashjha@google.com"]
-}
+# variable "users" {
+#   type        = list(string)
+#   description = "List of users, groups, SAs who need access to the kubernetes cluster via connect Gateway"
+#   default     = ["user:avinashjha@google.com"]
+# }
 
 variable "maintenance_start_time" {
   description = "Time window specified for daily or recurring maintenance operations in RFC3339 format"
@@ -97,3 +97,18 @@ variable "keys" {
   default     = []
 }
 
+variable "user_permissions" {
+  description = "Configure RBAC role for the user"
+  type = list(object({
+    user      = string
+    rbac_role = string
+  }))
+  default = [{
+    user      = "user:exampleuser@google.com"
+    rbac_role = "cluster-admin"
+    }, {
+    user      = "serviceaccount:EXAMPLE_SA@GCP_PROJECT_ID.iam.gserviceaccount.com"
+    rbac_role = "cluster-viewer"
+  }]
+
+}
